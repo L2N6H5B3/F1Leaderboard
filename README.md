@@ -11,3 +11,7 @@ Hamilton,Mercedes,45
 Leclerc,Ferrari,37
 ```
 3. Upload CSV to the location specified
+
+
+## Credits
+All F1 references and trademarks belong to their respective owners.
