@@ -1,5 +1,8 @@
+// Set the location of your CSV file
 var csvLocation = "https://testf1saacc.blob.core.windows.net/csv/test.csv";
 
+
+// Get CSV file
 function GetCsv() {
     $.ajax({
         type: "GET",
