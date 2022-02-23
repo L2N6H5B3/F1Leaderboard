@@ -59,10 +59,10 @@ function AddDriver(pos, name, team, pts) {
 
 // Compare Values
 function ComparePoints(a, b) {
-    if (a.Points < b.Points) {
+    if (parseInt(a.Points) < parseInt(b.Points)) {
         return 1;
     }
-    if (a.Points > b.Points) {
+    if (parseInt(a.Points) > parseInt(b.Points)) {
         return -1;
     }
     return 0;
