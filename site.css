@@ -49,6 +49,11 @@ main {
     position: relative;
 }
 
+.standings-container .round-total, .standings-container .round-number {
+    font-size: 28px;
+    margin: 8px 36px;
+}
+
 .standings-container .standing-row {
     height: 32px;
     background-color: #323232;
@@ -89,7 +94,7 @@ main {
 .standings-container .standing-row div.driver-pts {
     font-size: 22px;
     font-weight: 700;
-    width: 32px;
+    width: auto;
     text-align: center;
     position: absolute;
     right: 0;
