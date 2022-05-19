@@ -12,7 +12,7 @@ function GetCsv() {
         type: "GET",
         url: csvLocation,
         dataType: "text",
-        success: function (data) { ProcessData(data); }
+        success: function(data) { ProcessData(data); }
     });
 }
 
@@ -39,26 +39,26 @@ function ProcessData(data) {
     // Iterate through Drivers
     for (let i = 0; i < csvObjects.length; i++) {
         // Get the Index of the Driver
-        var addedDriverIndex = addedDrivers.findIndex(function (value) { return value.DriverName == csvObjects[i].Name; });
+        var addedDriverIndex = addedDrivers.findIndex(function(value) { return value.DriverName == csvObjects[i].Name; });
         console.log(addedDriverIndex);
         // If the Driver Doesn't Exist
         if (addedDriverIndex == -1) {
             // Add the Driver to the Array
             addedDrivers.push({ DriverName: csvObjects[i].Name, DriverTeam: csvObjects[i].Team, DriverPoints: csvObjects[i].Points });
         } else {
-            console.log("Adding Points to "+csvObjects[i].Name+": "+csvObjects[i].Points);
+            console.log("Adding Points to " + csvObjects[i].Name + ": " + csvObjects[i].Points);
             // Add the Driver Points to the Array
             addedDrivers[addedDriverIndex].DriverPoints = parseInt(addedDrivers[addedDriverIndex].DriverPoints) + parseInt(csvObjects[i].Points);
         }
 
         // Get the Index of the Position Counter for this Round
-        var addedPositionIndex = addedPositions.findIndex(function (value) { return value.Round == csvObjects[i].Round; });
+        var addedPositionIndex = addedPositions.findIndex(function(value) { return value.Round == csvObjects[i].Round; });
         // If the Round Doesn't Exist
         if (addedPositionIndex == -1) {
             // Add the Position to the Array
             addedPositions.push({ Round: csvObjects[i].Round, Position: 1 });
             // Get the Position Index
-            addedPositionIndex = addedPositions.findIndex(function (value) { return value.Round == csvObjects[i].Round; });
+            addedPositionIndex = addedPositions.findIndex(function(value) { return value.Round == csvObjects[i].Round; });
         } else {
             // Add to Position
             addedPositions[addedPositionIndex].Position++;
@@ -69,6 +69,9 @@ function ProcessData(data) {
 
     // Add the Total Standings Container
     AddTotal();
+
+    // Sort by most to least points
+    addedDrivers.sort(CompareTotalPoints);
 
     // Iterate through AddedDrivers
     for (let i = 0; i < addedDrivers.length; i++) {
@@ -163,6 +166,17 @@ function ComparePoints(a, b) {
     return 0;
 }
 
+// Compare Total Points
+function CompareTotalPoints(a, b) {
+    if (parseInt(a.DriverPoints) < parseInt(b.DriverPoints)) {
+        return 1;
+    }
+    if (parseInt(a.DriverPoints) > parseInt(b.DriverPoints)) {
+        return -1;
+    }
+    return 0;
+}
+
 // Initialise Page
 function InitialisePage() {
     // Get CSV
@@ -170,6 +184,6 @@ function InitialisePage() {
 }
 
 // On Page Ready
-$(document).ready(function () {
+$(document).ready(function() {
     InitialisePage();
 });
